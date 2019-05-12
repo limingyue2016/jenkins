@@ -42,7 +42,7 @@ task findbugs(type: FindBugs) {
     ignoreFailures = true
     effort = "default"
     reportLevel = "low"
-    excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
+//    excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
     classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")
     source= fileTree("src/main/java/")
 //    source 'src'
