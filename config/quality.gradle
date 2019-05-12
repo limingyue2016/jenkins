@@ -19,8 +19,8 @@ apply plugin: 'pmd'
  */
 
 // Add checkstyle, findbugs, pmd and lint to the check task.
-//check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
-check.dependsOn 'findbugs', 'pmd', 'lint'
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+//check.dependsOn 'findbugs', 'pmd', 'lint'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
@@ -35,18 +35,19 @@ task checkstyle(type: Checkstyle) {
     include '**/*.java'
     exclude '**/gen/**'
     classpath = files()
+
 }
 
 task findbugs(type: FindBugs) {
-    ignoreFailures = false
-    effort = "max"
+    ignoreFailures = true
+    effort = "default"
     reportLevel = "low"
     excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
     classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")
-
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
+    source= fileTree("src/main/java/")
+//    source 'src'
+//    include '**/*.java'
+//    exclude '**/gen/**'
 
     reports {
         xml.enabled = false
