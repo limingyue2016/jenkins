@@ -19,8 +19,8 @@ apply plugin: 'pmd'
  */
 
 // Add checkstyle, findbugs, pmd and lint to the check task.
-check.dependsOn 'checkstyle', 'findbugs', 'lint'
-//check.dependsOn 'checkstyle','findbugs', 'pmd', 'lint'
+//check.dependsOn 'checkstyle', 'findbugs', 'lint'
+check.dependsOn 'checkstyle','findbugs', 'pmd', 'lint'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
@@ -64,7 +64,7 @@ task findbugs(type: FindBugs) {
 }
 
 task pmd(type: Pmd) {
-    ignoreFailures = false
+    ignoreFailures = true
     ruleSetFiles = files("$configDir/pmd/pmd-ruleset.xml")
     ruleSets = []
 
