@@ -30,13 +30,12 @@ dependencies {
 //apply plugin: 'findbugs'
 //task findbugs(type: FindBugs, dependsOn:"assembleDebug") {  //定义一个task任务，类型是FindBugs，指定依赖assembleDebug是为了先生成.classe文件，才能对代码进行静态分析
 //    ignoreFailures= true  //有警告错误的时候也允许构建
-//    effort= "default"  //
-//    reportLevel= "low"  //报告级别 low，medium,high
-//    println( "$project.buildDir")
-//    excludeFilter = new File("${project.rootDir}/findbug_filter.xml")
+//    effort= "default"  //分析级别  Minimal/default/Maximal
+//    reportLevel= "low"  //报告级别 low/medium/high
 //    classes = files("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
 //    source= fileTree("src/main/java/")  //源代码文件地址
-//    classpath= files()
+//    excludeFilter = new File("${project.rootDir}/findbug_filter.xml")
+////    classpath= files()
 //    reports{  //指定报告类型，有xml和html，只允许一种输出格式
 //        xml.enabled=false
 //        html.enabled=true
