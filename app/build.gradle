@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply from: '../config/quality.gradle'
+apply from: '../config/quality.gradle'
 apply plugin: "com.github.spotbugs"
 
 android {
@@ -27,12 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
-spotbugs {
-    toolVersion = '3.1.12'
-}
-
 sourceSets {
     // we define `main` sourceSet here, so SpotBugs Gradle Plugin generates `spotbugsMain` task
     main {
@@ -40,6 +35,18 @@ sourceSets {
     }
 }
 
+//task spotbugs(type: com.github.spotbugs.SpotBugsTask) {
+//    ignoreFailures= true  //有警告错误的时候也允许构建
+//    effort= "default"  //分析级别  Minimal/default/Maximal
+//    reportLevel= "low"  //报告级别 low/medium/high
+//    classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
+//    source= fileTree("src/main/java/")  //源代码文件地址
+////    excludeFilter = new File("${project.rootDir}/findbugs-filter.xml")
+//    classpath= files()
+//    reports.xml.enabled = false
+//    reports.html.enabled = true
+//
+//}
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
     // configure automatically generated tasks
     ignoreFailures= true  //有警告错误的时候也允许构建
@@ -52,4 +59,5 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
     reports.xml.enabled = false
     reports.html.enabled = true
 }
+
 

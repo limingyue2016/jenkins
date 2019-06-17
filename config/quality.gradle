@@ -1,37 +1,49 @@
 apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
 apply plugin: 'pmd'
-
+apply plugin: "com.github.spotbugs"
 // Add checkstyle, findbugs, pmd and lint to the check task.
-check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+//check.dependsOn 'checkstyle', 'pmd'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
 
-task findbugs(type: FindBugs) {
-    ignoreFailures = true
-    effort = "default"
-    reportLevel = "low"
-    excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
-    classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
-
-    reports {
-        xml.enabled = false
-        html.enabled = true
-        xml {
-            destination "$reportsDir/findbugs/findbugs.xml"
-        }
-        html {
-            destination "$reportsDir/findbugs/findbugs.html"
-        }
-    }
-
-    classpath = files()
+spotbugs {
+    toolVersion = '3.1.12'
 }
 
+
+
+//spotbugs{
+//    ignoreFailures=true
+//    htmlReport=true
+//    reportsDir =
+//}
+//tasks.withType(com.github.spotbugs.SpotBugsTask) {
+//    // configure automatically generated tasks
+//    ignoreFailures= true  //有警告错误的时候也允许构建
+//    effort= "default"  //分析级别  Minimal/default/Maximal
+//    reportLevel= "low"  //报告级别 low/medium/high
+//    classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
+//    source= fileTree("src/main/java/")  //源代码文件地址
+////    excludeFilter = new File("${project.rootDir}/findbugs-filter.xml")
+//    classpath= files()
+//    reports.xml.enabled = false
+//    reports.html.enabled = true
+//}
+        /*{
+            tasks.withType(com.github.spotbugs.SpotBugsTask) {
+                // configure automatically generated tasks
+                ignoreFailures= true  //有警告错误的时候也允许构建
+                effort= "default"  //分析级别  Minimal/default/Maximal
+                reportLevel= "low"  //报告级别 low/medium/high
+                classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
+                source= fileTree("src/main/java/")  //源代码文件地址
+//    excludeFilter = new File("${project.rootDir}/findbugs-filter.xml")
+                classpath= files()
+                reports.xml.enabled = false
+                reports.html.enabled = true
+            }
+        }*/
 checkstyle {
     toolVersion = '8.20'
 }
@@ -46,12 +58,12 @@ task checkstyle(type: Checkstyle) {
     reports {
         xml.enabled = false
         html.enabled = true
-        xml {
+ /*       xml {
             destination "$reportsDir/checkstyle/checkstyle.xml"
         }
         html {
             destination "$reportsDir/checkstyle/checkstyle.html"
-        }
+        }*/
     }
     classpath = files()
 
@@ -71,12 +83,12 @@ task pmd(type: Pmd) {
     reports {
         xml.enabled = false
         html.enabled = true
-        xml {
+/*        xml {
             destination "$reportsDir/pmd/pmd.xml"
         }
         html {
             destination "$reportsDir/pmd/pmd.html"
-        }
+        }*/
     }
 }
 
