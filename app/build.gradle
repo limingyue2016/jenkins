@@ -31,13 +31,10 @@ dependencies {
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
 
-
-
-
-
 spotbugs {
     toolVersion = '3.1.12'
 }
+
 
 sourceSets {
     // we define `main` sourceSet here, so SpotBugs Gradle Plugin generates `spotbugsMain` task
@@ -46,16 +43,15 @@ sourceSets {
     }
 }
 
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-    // configure automatically generated tasks
-    ignoreFailures= true  //有警告错误的时候也允许构建
-    effort= "default"  //分析级别  Minimal/default/Maximal
-    reportLevel= "low"  //报告级别 low/medium/high
-    classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
-    source= fileTree("src/main/java/")  //源代码文件地址
-    excludeFilter = new File("${project.rootDir}/findbugs-filter.xml")
-    classpath= files()
-    reports.xml.enabled = false
-    reports.html.enabled = true
-}
-
+//task spotbugs(type: com.github.spotbugs.SpotBugsTask) {
+//    ignoreFailures= true  //有警告错误的时候也允许构建
+//    effort= "default"  //分析级别  Minimal/default/Maximal
+//    reportLevel= "low"  //报告级别 low/medium/high
+//    classes = files("${project.rootDir}/app/build/intermediates/javac/debug/compileDebugJavaWithJavac")  //.classe文件夹地址
+//    source= fileTree("src/main/java/")  //源代码文件地址
+////    excludeFilter = new File("${project.rootDir}/findbugs-filter.xml")
+//    classpath= files()
+//    reports.xml.enabled = false
+//    reports.html.enabled = true
+//
+//}
