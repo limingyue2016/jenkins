@@ -2,7 +2,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: "com.github.spotbugs"
 // Add checkstyle, findbugs, pmd and lint to the check task.
-//check.dependsOn 'checkstyle', 'pmd'
+check.dependsOn 'checkstyle', 'pmd'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
